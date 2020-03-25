@@ -10,11 +10,17 @@
 
 adress = ['www.google.ru','google.com','google.ru']
 
-def change_adress (adress):
-    for i in range (len(adress)):
-        if adress[i].startswith('www.'):
-            adress[i] = 'http://' + adress[i]
-        if adress[i].endswith('.com') == False:
-            adress[i] = adress[i] + '.com'
-        print (adress[i])
-change_adress(adress)
+corrected_adress = [
+    (
+        "http://" + ".".join(i.split(".")[:-1]) + ".com"
+        if i[-3:] != "com"
+        else 
+        "http://" + i
+    )
+    if i[0:3] == "www" or i[0:7] != "http://"
+    else 
+        ".".join(i.split(".")[:-1]) + ".com"
+    for i in adress
+]
+
+print(corrected_adress)
